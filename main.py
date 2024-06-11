@@ -19,7 +19,6 @@ URL = 'https://kg-portal.ru/news/anime/'
 
 async def send_news(context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
-        logger.info("Attempting to send news...")
         # Send a GET request to the website
         response = requests.get(URL)
         response.raise_for_status()
@@ -30,15 +29,17 @@ async def send_news(context: ContextTypes.DEFAULT_TYPE) -> None:
         # Find the element with the specified class
         element = soup.select_one('.news_box.anime_cat')
         post_id = element.get('id')
-        logger.debug(f"Found element: {element}")
 
         # Check if element is found
         if element is None:
-            logger.info('No element found with the specified class')
             return
 
         # Extract image source, title, and content
-        image_src = element.find('picture').find('img').get('src')
+        picture = element.find('picture')
+        if picture is None:
+            return
+
+        image_src = picture.find('img').get('src')
         title = element.find('h2').get_text()
         content = element.select_one('.news_text').text.strip()
 
