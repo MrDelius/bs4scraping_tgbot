@@ -1,7 +1,7 @@
 import logging
 import requests
 from bs4 import BeautifulSoup
-from telegram.ext import Application, ContextTypes
+from telegram.ext import Application, ContextTypes, CommandHandler
 from telegram import Update
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -62,6 +62,10 @@ async def send_news(context: ContextTypes.DEFAULT_TYPE) -> None:
         logger.error(f'An error occurred: {e}')
 
 
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_text('Bot is active!')
+
+
 # Define a function to handle errors
 async def error(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     logger.warning(f'Update {update} caused error {context.error}')
@@ -73,6 +77,7 @@ def main():
 
     # Log all errors
     application.add_error_handler(error)
+    application.add_handler(CommandHandler('start', start))
 
     # Add a job to send news every hour
     job_queue = application.job_queue
