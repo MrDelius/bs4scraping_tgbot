@@ -23,7 +23,7 @@ myURL = 'https://tgpost.onrender.com'
 async def send_news(context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
         # Send a GET request to the website
-        status = requests.get(myURL)
+        requests.get(myURL)
         time.sleep(4)
 
         response = requests.get(URL)
