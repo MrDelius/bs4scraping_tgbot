@@ -1,5 +1,5 @@
 import logging
-import time
+import asyncio
 
 import requests
 from bs4 import BeautifulSoup
@@ -24,7 +24,7 @@ async def send_news(context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
         # Send a GET request to the website
         requests.get(myURL)
-        time.sleep(4)
+        await asyncio.sleep(4)
 
         response = requests.get(URL)
         response.raise_for_status()
