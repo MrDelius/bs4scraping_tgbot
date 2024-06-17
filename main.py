@@ -1,4 +1,6 @@
 import logging
+import time
+
 import requests
 from bs4 import BeautifulSoup
 from telegram.ext import Application, ContextTypes, CommandHandler
@@ -22,7 +24,7 @@ async def send_news(context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
         # Send a GET request to the website
         status = requests.get(myURL)
-        status.raise_for_status()
+        time.sleep(4)
 
         response = requests.get(URL)
         response.raise_for_status()
