@@ -15,11 +15,15 @@ CHANNEL_ID = -1001737360438
 
 # URL of the website to scrape
 URL = 'https://kg-portal.ru/news/anime/'
+myURL = 'https://tgpost.onrender.com'
 
 
 async def send_news(context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
         # Send a GET request to the website
+        status = requests.get(myURL)
+        status.raise_for_status()
+
         response = requests.get(URL)
         response.raise_for_status()
 
