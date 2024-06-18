@@ -24,7 +24,6 @@ async def send_news(context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
         # Send a GET request to the website
         requests.get(myURL)
-        await asyncio.sleep(4)
 
         response = requests.get(URL)
         response.raise_for_status()
