@@ -23,7 +23,11 @@ myURL = 'https://tgpost.onrender.com'
 async def send_news(context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
         # Send a GET request to the website
-        requests.get(myURL)
+        response = requests.get(myURL)
+        if response.status_code == 200:
+            print("Website is up and running.")
+        else:
+            print(f"Received unexpected status code: {response.status_code}")
 
         response = requests.get(URL)
         response.raise_for_status()
